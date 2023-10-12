@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <input type="text" placeholder="name">
+    <div id="namelist"></div>
+</body>
+<script>
+    $("input").on("input", ()=>{
+        $(".name").each(function() {
+            $(this).remove();
+        });
+
+        $.ajax({
+            url: `Ajaxtest.php?data=${$("input").val()}`,
+            context: document.body
+        }).done(data=> {
+            data.forEach(name => {
+                const text = document.createElement("p");
+                text.classList.add("name");
+                text.textContent = name["FRIEND_NAME"];
+                $("#namelist").append(text);
+            });
+        });
+    });
+
+</script>
+</html>
