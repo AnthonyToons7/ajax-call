@@ -15,11 +15,14 @@
         $(".name").each(function() {
             $(this).remove();
         });
-
+        call($("input").val())
+    });
+    const call = (val)=>{
         $.ajax({
-            url: `Ajaxtest.php?data=${$("input").val()}`,
+            url: `Ajaxtest.php?data=${val}`,
             context: document.body
         }).done(data=> {
+            console.log(data);
             data.forEach(name => {
                 const text = document.createElement("p");
                 text.classList.add("name");
@@ -27,7 +30,6 @@
                 $("#namelist").append(text);
             });
         });
-    });
-
+    }
 </script>
 </html>
